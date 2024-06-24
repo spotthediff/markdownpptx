@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box; 
+    font-size: 36px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+#convert_button {
+    align-self: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 50px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #39a9a6;
+    margin-top: 40px;
+}
+
+div#main_control {
+    display: flex;
+    width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+div#main_control > * {
+    margin-top: 7px;
+}
+
+div.input_control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.filename_view {
+    font-size: 22px;
+}
+
+div#reference_output_button {
+    margin-top: 70px;
+}
+
+
+div#reference_doc_chooser {
+    margin-top: 17px;
+}
+
+div#marp_config_file_chooser {
+    display: none;
+}
+
+input#output_picture {
+    transform: scale(2.2);
+    display: inline-block;
+    margin-left: 13px;
+}
+
+button#reference_doc_output_button {
+    font-size: 16px;
+}
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Markdown2PPTX</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div id="main_control">
+                <div id="file_chooser" class="input_control">
+                    <button id="markdown_choose_button">Select Markdown File</button>
+                    <div id="markdown_filename_view" class="filename_view"></div>
+                </div>
+                <div class="input_control">
+                    <label for="markdown_type">Format</label>
+                    <select id="markdown_type">
+                        <option value="commonmark">CommonMark</option>
+                        <option value="commonmark_x">CommonMark with extensions</option>
+                        <option value="markdown">Pandoc's Markdown</option>
+                        <option value="gfm">GitHub Flavored Markdown</option>
+                        <option value="markdown_mmd">MultiMarkdown</option>
+                        <option value="markdown_phpextra">PHP Markdown Extra</option>
+                        <option value="markdown_strict" selected>Original Markdown</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="output_picture">Output as a Image Slide (with Marp)</label>
+                    <input type="checkbox" id="output_picture">
+                </div>
+                <div id="marp_config_file_chooser" class="input_control">
+                    <button id="marp_config_choose_button">Select Marp Config File</button>
+                    <div id="marp_config_filename_view" class="filename_view"></div>
+                </div>
+                <div id="reference_doc_chooser" class="input_control">
+                    <button id="reference_doc_choose_button">Select Reference Slide</button>
+                    <div id="reference_doc_filename_view" class="filename_view"></div>
+                </div>
+                <div class="input_control">
+                    <button id="convert_button">Convert</button>
+                </div>
+            </div>
+            <div id="reference_output_button">
+                <button id="reference_doc_output_button">Output Reference Slide Template</button>
+            </div>
+        </div>
+    </body>
+    <script src="render.js"></script>
+</html>

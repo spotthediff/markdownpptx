@@ -1,0 +1,4 @@
+pandoc
+*.exe
+*.pptx
+node_modules/
