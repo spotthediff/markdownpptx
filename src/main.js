@@ -5,6 +5,28 @@ const fs = require("node:fs").promises;
 const child_process = require("node:child_process");
 const { marpCli } = require('@marp-team/marp-cli');
 
+const pandoc_executable_path = () => {
+    let os_name;
+    let exe_name;
+    switch (process.platform) {
+        case "linux":
+            os_name = "linux";
+            exe_name = "pandoc";
+            break;
+        case "darwin":
+            os_name = "macos";
+            exe_name = "pandoc";
+            break;
+        case "win32":
+            os_name = "win";
+            exe_name = "pandoc.exe";
+            break;
+        default:
+            return "";
+    }
+    return path.join(process.resourcesPath, "bin", os_name, exe_name);
+}
+
 const distdir_path = path.join(os.homedir(), "markdownpptx");
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -38,20 +60,14 @@ app.whenReady().then(() => {
 })
 
 const output_reference = async () => {
-    let os_name = "linux"
-    let exe_name = "pandoc"
-    if (process.platform === "win32") {
-        os_name = "win"
-        exe_name += ".exe"
-    }
     const dircreation = await fs.mkdir(distdir_path, { recursive: true });
-    const executable_path = path.join(__dirname, "..", "bin", os_name, exe_name);
+    const executable_path = pandoc_executable_path();
     const output_path = path.join(distdir_path, "reference.pptx");
     child_process.execFile(executable_path, ["-o", output_path, "--print-default-data-file", "reference.pptx"], (error, stdout, stderr) => {
         if (error) {
             dialog.showErrorBox("Error", error.message);
         } else {
-            dialog.showMessageBox({ message: "Done Successfully!\nOutput Reference Side to " + output_path })
+            dialog.showMessageBox({ message: "Done Successfully!\nOutput Reference Side to " + output_path });
         }
     })
 
@@ -85,10 +101,10 @@ const execute_marp = async (settings) => {
             if (exitStatus > 0) {
                 dialog.showErrorBox("Error", `Error (Exit status: ${exitStatus})`);
             } else {
-                dialog.showMessageBox({ message: `Done Successfully!\nOutput to ${output_path}` })
+                dialog.showMessageBox({ message: `Done Successfully!\nOutput to ${output_path}` });
             }
         })
-        .catch(console.error)
+        .catch(console.error);
 }
 
 const execute_pandoc = async (settings) => {
@@ -111,21 +127,14 @@ const execute_pandoc = async (settings) => {
             return { "error": "Reference doc error" };
         }
     }
-    let os_name = "linux"
-    let exe_name = "pandoc"
-    if (process.platform === "win32") {
-        os_name = "win"
-        exe_name += ".exe"
-    }
-
     const dircreation = await fs.mkdir(distdir_path, { recursive: true });
-    const executable_path = path.join(__dirname, "..", "bin", os_name, exe_name);
+    const executable_path = pandoc_executable_path();
     const extname = path.extname(settings.markdown);
     const name = path.win32.basename(settings.markdown, extname);
     const output_path = path.join(distdir_path, name + ".pptx");
     let option = [settings.markdown, "-f", settings.markdown_type, "-t", "pptx", "-s", "-o", output_path];
     if (settings.reference_doc !== undefined && reference_doc_error === false) {
-        option = option.concat(["--reference-doc", settings.reference_doc])
+        option = option.concat(["--reference-doc", settings.reference_doc]);
     }
     child_process.execFile(executable_path, option, (error, stdout, stderr) => {
         if (error) {
@@ -134,7 +143,10 @@ const execute_pandoc = async (settings) => {
             error_obj = error;
             dialog.showErrorBox("Error", error.message);
         } else {
-            dialog.showMessageBox({ message: "Done Successfully!\noutput to " + output_path })
+            dialog.showMessageBox({ message: "Done Successfully!\noutput to " + output_path });
         }
     })
 }
+
+
+

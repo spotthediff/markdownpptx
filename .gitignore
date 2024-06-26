@@ -2,3 +2,6 @@ pandoc
 *.exe
 *.pptx
 node_modules/
+forge.config.js
+
+out/
