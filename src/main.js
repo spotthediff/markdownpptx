@@ -1,4 +1,5 @@
 const { app, BrowserWindow, dialog, ipcMain } = require("electron");
+if (require('electron-squirrel-startup')) app.quit();
 const path = require("node:path");
 const os = require("node:os");
 const fs = require("node:fs").promises;
@@ -147,6 +148,4 @@ const execute_pandoc = async (settings) => {
         }
     })
 }
-
-
 
