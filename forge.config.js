@@ -15,6 +15,7 @@ module.exports = {
             name: '@electron-forge/maker-squirrel',
             config: {
                 icon: "images/MARKDOWNPPTX.ico",
+                setupIcon: "./images/MARKDOWNPPTX.ico",
                 extraResource: [
                     "bin/win"
                 ]
