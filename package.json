@@ -1,6 +1,6 @@
 {
   "name": "markdownpptx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tool for convert from markdown to pptx",
   "main": "src/main.js",
   "scripts": {
